@@ -6,7 +6,7 @@ const Hero = () => {
     <section id="home" className="hero-section">
       <div className="hero-video">
         <video autoPlay muted loop playsInline preload="auto">
-          <source src="assets/7101968-uhd_1440_2190_25fps.mp4" type="video/mp4" />
+          <source src="assets/bgvideo.webm" />
         </video>
       </div>
       <div className="hero-content">
