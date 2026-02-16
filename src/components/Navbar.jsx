@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  // REMOVE: const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,9 +36,9 @@ function Navbar() {
     setIsMenuOpen(false);
   };
 
-  // ADD: dropdown handlers
-  const toggleDropdown = () => setIsDropdownOpen(prev => !prev);
-  const closeDropdown = () => setIsDropdownOpen(false);
+  // REMOVE: dropdown handlers
+  // const toggleDropdown = () => setIsDropdownOpen(prev => !prev);
+  // const closeDropdown = () => setIsDropdownOpen(false);
 
   return (
     <nav className="navbar" style={{
@@ -63,33 +63,35 @@ function Navbar() {
         {/* Replace inline styles with palette-aware classes */}
         <div
           className="nav-item-dropdown"
-          onMouseEnter={() => setIsDropdownOpen(true)}
-          onMouseLeave={() => setIsDropdownOpen(false)}
+          // REMOVE: onMouseEnter={() => setIsDropdownOpen(true)}
+          // REMOVE: onMouseLeave={() => setIsDropdownOpen(false)}
         >
           {/* Hide the trigger button on small screens */}
           {!isSmallScreen && (
-            <button
-              className={`nav-button ${isDropdownOpen ? 'active' : ''}`}
-              aria-haspopup="true"
-              aria-expanded={isDropdownOpen}
-              onClick={() => setIsDropdownOpen(prev => !prev)}
-              onFocus={() => setIsDropdownOpen(true)}
+            <a // CHANGE: from button to a
+              href="#contact" // ADD: href for navigation
+              className="nav-button" // REMOVE: ${isDropdownOpen ? 'active' : ''}
+              // REMOVE: aria-haspopup="true"
+              // REMOVE: aria-expanded={isDropdownOpen}
+              onClick={() => closeMenu()} // CHANGE: to navigate and close menu
+              // REMOVE: onFocus={() => setIsDropdownOpen(true)}
             >
               Explore Opportunities
-            </button>
+            </a>
           )}
 
-          {(isDropdownOpen || isMenuOpen) && (
+          {/* Only show dropdown menu when main menu is open (for small screens) */}
+          {isMenuOpen && ( // CHANGE: condition from (isDropdownOpen || isMenuOpen) to isMenuOpen
             <ul
               className="nav-dropdown-menu"
               role="menu"
               aria-label="Primary navigation"
             >
-              <li><a className="nav-dropdown-link" href="#home" onClick={() => { closeMenu(); closeDropdown(); }}>Home</a></li>
-              <li><a className="nav-dropdown-link" href="#about" onClick={() => { closeMenu(); closeDropdown(); }}>About</a></li>
-              <li><a className="nav-dropdown-link" href="#partners" onClick={() => { closeMenu(); closeDropdown(); }}>Partners</a></li>
-              <li><a className="nav-dropdown-link" href="#format" onClick={() => { closeMenu(); closeDropdown(); }}>Format</a></li>
-              <li><a className="nav-dropdown-link" href="#contact" onClick={() => { closeMenu(); closeDropdown(); }}>Contact</a></li>
+              <li><a className="nav-dropdown-link" href="#home" onClick={() => { closeMenu(); /* REMOVE: closeDropdown(); */ }}>Home</a></li>
+              <li><a className="nav-dropdown-link" href="#about" onClick={() => { closeMenu(); /* REMOVE: closeDropdown(); */ }}>About</a></li>
+              <li><a className="nav-dropdown-link" href="#partners" onClick={() => { closeMenu(); /* REMOVE: closeDropdown(); */ }}>Partners</a></li>
+              <li><a className="nav-dropdown-link" href="#format" onClick={() => { closeMenu(); /* REMOVE: closeDropdown(); */ }}>Format</a></li>
+              <li><a className="nav-dropdown-link" href="#contact" onClick={() => { closeMenu(); /* REMOVE: closeDropdown(); */ }}>Contact</a></li>
             </ul>
           )}
         </div>
